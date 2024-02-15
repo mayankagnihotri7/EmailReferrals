@@ -8,13 +8,13 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { isEmpty } from "ramda";
 
 import referralsApi from "apis/referrals";
+import usersApi from "apis/users";
 
 import ReferralBox from "./ReferralBox";
 import Title from "./Title";
-
-import usersApi from "../apis/users";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -70,7 +70,7 @@ const Dashboard = () => {
         <Button onClick={handleLogout}>Log out</Button>
       </Box>
       <Title>Referred Emails</Title>
-      {referrals ? (
+      {!isEmpty(referrals) ? (
         <Table size="small">
           <TableHead>
             <TableRow>
