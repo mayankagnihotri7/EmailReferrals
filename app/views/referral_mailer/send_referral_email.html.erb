@@ -1,0 +1,21 @@
+<!-- app/views/referral_mailer/send_referral_email.html.erb -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h1>Invitation to Join Our Platform</h1>
+
+  <p>Hello,</p>
+
+  <p>You have been invited to join our platform by <%= @referring_user.email %>.</p>
+
+  <p>To sign up, please click on the following link:</p>
+
+  <p><%= link_to 'Sign Up Now', new_user_registration_with_referral_url(@referral_code) %></p>
+
+  <p>Thank you!</p>
+</body>
+</html>
