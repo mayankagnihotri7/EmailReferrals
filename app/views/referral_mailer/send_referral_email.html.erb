@@ -14,7 +14,7 @@
 
   <p>To sign up, please click on the following link:</p>
 
-  <p><%= link_to 'Sign Up Now', new_user_registration_with_referral_url(@referral_code) %></p>
+  <p><%= link_to 'Sign Up Now', "#{root_url}signup?code=#{@referral_code}" %></p>
 
   <p>Thank you!</p>
 </body>

@@ -38,7 +38,12 @@ const SignIn = () => {
       email,
       password,
     };
-    await usersApi.login({ user: { ...formData } });
+
+    const {
+      data: { is_signed_in },
+    } = await usersApi.login({ user: { ...formData } });
+
+    localStorage.setItem("isSignedIn", is_signed_in);
   };
 
   return (
@@ -59,12 +64,7 @@ const SignIn = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box
-            noValidate
-            component="form"
-            sx={{ mt: 1 }}
-            onSubmit={handleSubmit}
-          >
+          <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit}>
             <TextField
               autoFocus
               fullWidth

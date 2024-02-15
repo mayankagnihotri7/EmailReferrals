@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if user.errors.present?
       render json: { error: user.errors }, status: :unprocessable_entity
     else
-      render json: { notice: "Signed up successfully!", email: user.email }, status: :ok
+      render json: { notice: "Signed up successfully!" }, status: :ok
     end
   end
 end

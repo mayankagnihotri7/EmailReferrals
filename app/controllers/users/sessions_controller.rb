@@ -7,7 +7,7 @@ class Users::SessionsController < Devise::SessionsController
     if user.errors.present?
       render json: { error: user.errors }, status: :unprocessable_entity
     else
-      render json: { notice: "Logged in successfully!", user: }, status: :ok
+      render json: { notice: "Logged in successfully!", is_signed_in: user_signed_in? }, status: :ok
     end
   end
 end
