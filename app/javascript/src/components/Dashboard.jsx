@@ -29,25 +29,35 @@ const Dashboard = () => {
   }, []);
 
   const fetchReferralsList = async () => {
-    const {
-      data: { referrals },
-    } = await referralsApi.fetch();
-    setReferrals(referrals);
+    try {
+      const {
+        data: { referrals },
+      } = await referralsApi.fetch();
+      setReferrals(referrals);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const createReferrals = async e => {
     preventDefault(e);
 
-    await referralsApi.sendReferralEmail({ referral: { email } });
-    window.location.reload();
+    try {
+      await referralsApi.sendReferralEmail({ referral: { email } });
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleLogout = async () => {
+  const handleLogout = async e => {
+    preventDefault(e);
+
     try {
       await usersApi.logout();
 
       localStorage.removeItem("isSignedIn");
-      history.push("/");
+      window.location.href = "/";
     } catch (error) {
       console.log(error);
     }
@@ -55,12 +65,9 @@ const Dashboard = () => {
 
   return (
     <Container component="main">
-      <Box
-        sx={{ display: "flex", justifyContent: "space-between" }}
-        onClick={handleLogout}
-      >
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <ReferralBox createReferrals={createReferrals} setReferral={setEmail} />
-        <Button>Log out</Button>
+        <Button onClick={handleLogout}>Log out</Button>
       </Box>
       <Title>Referred Emails</Title>
       {referrals ? (
