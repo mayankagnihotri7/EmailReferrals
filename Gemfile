@@ -43,6 +43,11 @@ gem "bootsnap", require: false
 # For authentication
 gem "devise", "~> 4.9"
 
+gem "foreman"
+
+# Brakeman analyzes our code for security vulnerabilities
+gem "brakeman"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

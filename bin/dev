@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+foreman start -f Procfile.dev

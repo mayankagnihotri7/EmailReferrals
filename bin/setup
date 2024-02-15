@@ -40,10 +40,6 @@ def help
   log "
     # run app locally"
   log ""
-  log " LOGRAGE_IN_DEVELOPMENT=true bin/run"
-  log "
-    # run app locally using production like logging"
-  log ""
   log ""
   log " bin/ci"
   log "
@@ -70,7 +66,7 @@ end
 # instead of Kernel#system and friends
 def system!(*args)
   log "Executing #{args}"
-  
+
   if system(*args)
     log "#{args} succeeded"
   else

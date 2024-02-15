@@ -78,6 +78,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
+    brakeman (6.1.2)
+      racc
     builder (3.2.4)
     capybara (3.40.0)
       addressable
@@ -103,6 +105,7 @@ GEM
       warden (~> 1.2.3)
     erubi (1.12.0)
     execjs (2.9.1)
+    foreman (0.87.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -278,9 +281,11 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  brakeman
   capybara
   debug
   devise (~> 4.9)
+  foreman
   jbuilder
   letter_opener
   mysql2 (~> 0.5)
