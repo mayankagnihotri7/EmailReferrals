@@ -6,13 +6,24 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
+  VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  MAX_EMAIL_LENGTH = 255
+  MAX_NAME_LENGTH = 20
+  MIN_PASSWORD_LENGTH = 6
+
   has_many :referrals, foreign_key: :referring_user_id, dependent: :destroy
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, length: { minimum: 10 }
+
+  validates :email, presence: true,
+    uniqueness: { case_sensitive: false },
+    length: { maximum: MAX_EMAIL_LENGTH },
+    format: { with: VALID_EMAIL_REGEX }
+
+  validates :password, length: { minimum: MIN_PASSWORD_LENGTH }
+
   validates :first_name, :last_name,
     presence: true,
     format: { with: /\A[a-zA-Z\s]+\z/ },
-    length: { maximum: 20 }
+    length: { maximum: MAX_NAME_LENGTH }
 
   before_create :generate_referral_code
 

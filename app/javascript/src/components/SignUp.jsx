@@ -13,6 +13,7 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { useHistory } from "react-router-dom";
 
 import usersApi from "apis/users";
 
@@ -33,6 +34,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -42,7 +44,14 @@ const SignUp = () => {
       email,
       password,
     };
-    await usersApi.create({ user: { ...formData } });
+
+    try {
+      await usersApi.create({ user: { ...formData } });
+
+      history.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
