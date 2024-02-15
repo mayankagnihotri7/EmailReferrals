@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { Box } from "@mui/material";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,6 +13,8 @@ import referralsApi from "apis/referrals";
 
 import ReferralBox from "./ReferralBox";
 import Title from "./Title";
+
+import usersApi from "../apis/users";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -38,28 +42,51 @@ const Dashboard = () => {
     window.location.reload();
   };
 
+  const handleLogout = async () => {
+    try {
+      await usersApi.logout();
+
+      localStorage.removeItem("isSignedIn");
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container component="main">
-      <ReferralBox createReferrals={createReferrals} setReferral={setEmail} />
+      <Box
+        sx={{ display: "flex", justifyContent: "space-between" }}
+        onClick={handleLogout}
+      >
+        <ReferralBox createReferrals={createReferrals} setReferral={setEmail} />
+        <Button>Log out</Button>
+      </Box>
       <Title>Referred Emails</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Email</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {referrals.map((row, idx) => (
-            <TableRow key={idx}>
-              <TableCell>
-                <a href={`mailto:${row}`} target="_top">
-                  {row}
-                </a>
-              </TableCell>
+      {referrals ? (
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Email</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {referrals.map((row, idx) => (
+              <TableRow key={idx}>
+                <TableCell>
+                  <a href={`mailto:${row}`} target="_top">
+                    {row}
+                  </a>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      ) : (
+        <p>
+          You have not referred any emails. Get started by entering it above.
+        </p>
+      )}
     </Container>
   );
 };

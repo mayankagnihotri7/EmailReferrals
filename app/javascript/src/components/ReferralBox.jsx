@@ -1,7 +1,7 @@
 import React from "react";
 
-import SearchIcon from "@mui/icons-material/Search";
-import IconButton from "@mui/material/IconButton";
+import SendIcon from "@mui/icons-material/Send";
+import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 const ReferralBox = ({ setReferral, createReferrals }) => (
@@ -17,9 +17,15 @@ const ReferralBox = ({ setReferral, createReferrals }) => (
         setReferral(e.target.value);
       }}
     />
-    <IconButton aria-label="search" type="submit">
-      <SearchIcon style={{ fill: "blue" }} />
-    </IconButton>
+    <Button
+      endIcon={<SendIcon />}
+      size="small"
+      sx={{ ml: 1 }}
+      type="submit"
+      variant="contained"
+    >
+      Invite users
+    </Button>
   </form>
 );
 
