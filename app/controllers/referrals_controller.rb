@@ -9,7 +9,7 @@ class ReferralsController < ApplicationController
 
     if referral.save
       ReferralMailer.send_referral_email(email, current_user).deliver_now
-      render status: :ok, json: { notice: "Referral code sent successfully!" }
+      render status: :ok, json: { notice: "Referral code sent to #{email}!" }
     else
       render status: :unprocessable_entity,
         json: { error: "Failed to send referral email", errors: referral.errors.full_messages.to_sentence }

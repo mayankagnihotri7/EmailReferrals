@@ -23,8 +23,9 @@ import "../src/stylesheets/application.scss"
 
 const componentRequireContext = require.context("src", true);
 
-const { setAuthHeaders } = require("apis/axios");
+const { setAuthHeaders, registerIntercepts } = require("apis/axios");
 
+registerIntercepts();
 setAuthHeaders();
 
 const ReactRailsUJS = require("react_ujs");
